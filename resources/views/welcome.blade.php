@@ -126,7 +126,7 @@
                 </div>
             </div>
 
-            <div class="modal" id="viewtask" tabindex="-1" role="dialog">
+            <div class="modal fade" id="viewtask" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                     <div class="modal-header">
@@ -142,7 +142,7 @@
                 </div>
             </div>
 
-            <div class="modal" id="edittask" tabindex="-1" role="dialog">
+            <div class="modal fade" id="edittask" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                     <div class="modal-header">
