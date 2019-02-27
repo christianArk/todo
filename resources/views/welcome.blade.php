@@ -104,6 +104,7 @@
                                 <td>@{{ item.title }}</td>
                                 <td>
                                     <div class="pull-right btn-group">
+                                        <button class="btn btn-default" @click="editTask(item.id)"><i class="fa fa-pencil"></i></button>
                                         <button class="btn btn-info" @click="viewTask(item.id)"><i class="fa fa-eye"></i></button>
                                         <button class="btn btn-danger" @click="deleteTask(item.id)"><i class="fa fa-trash"></i></button>
                                     </div>
@@ -111,17 +112,6 @@
                             </tr>
                         </tbody>
                     </table>
-                    {{-- <ul class="list-group">
-                        <li v-for="item in items" class="list-group-item">
-                            <div class="pull-left">
-                                @{{ item.title }}
-                            </div>
-                            <div class="pull-right btn-group">
-                                <button class="btn btn-info" @click="viewTask(item.id)">View</button>
-                                <button class="btn btn-danger" @click="deleteTask(item.id)">Delete</button>
-                            </div>
-                        </li>
-                    </ul> --}}
                     </div>
                     <div v-else>
                         <div class="alert alert-info">You have not added any task!</div>
@@ -147,6 +137,26 @@
                     </div>
                     <div class="modal-body">
                         <p>@{{ item.title }}</p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal" id="edittask" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Task</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" class="form-control" v-model="item.title" />
+                        </div>
+                        <button class="btn btn-primary" @click="updateTask">Update</button>
                     </div>
                     </div>
                 </div>
@@ -179,6 +189,23 @@
                     this.$http.get('/gettask/' + taskid).then(res => {
                         $('#viewtask').modal('show');
                         this.item = res.data;
+                    });
+                },
+                editTask: function(taskid) {
+                    this.$http.get('/gettask/' + taskid).then(res => {
+                        $('#edittask').modal('show');
+                        this.item = res.data;
+                    });
+                },
+                updateTask: function() {
+                    this.$http.post('/updatetask', {id: this.item.id, title: this.item.title}).then(res => {
+                        this.getTasks();
+                        $('#edittask').modal('hide');
+                        swal({
+                            title: "Task Updated!",
+                            text: "You have successfully updated a task!",
+                            icon: "success",
+                        });
                     });
                 },
                 deleteTask: function(taskid) {
