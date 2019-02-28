@@ -1,5 +1,5 @@
 # Installation
-This is a simple todo application that allows you create, view and delete tasks.
+This is a simple todo application that allows you create, view, edit and delete tasks.
 
 Follow this process below to install this todo application
 * Clone project to your system
